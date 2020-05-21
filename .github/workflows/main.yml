@@ -126,8 +126,12 @@ jobs:
       - name: Create a Release APK
         uses: ncipollo/release-action@v1
         with:
-          artifacts: "build/app/outputs/apk/debug/*.apk"
+          tag: ${{ env.APP_VERSION }}
+          name: ${{ env.APP_VERSION }}
+          artifacts: "build/app/outputs/apk/debug/*.apk,build/ios/iphoneos/app.ipa"
           token: ${{ secrets.GITHUB_TOKEN }}
+        env:
+          APP_VERSION: 1.0.0
       - run: flutter build web
       # Handle the deploy process of your project to GitHub Pages.
       # https://github.com/JamesIves/github-pages-deploy-action
